@@ -1,0 +1,41 @@
+{
+  "results": {
+    "A": {
+      "status": 200,
+      "frames": [
+        {
+          "schema": {
+            "name": "measurement",
+            "refId": "A",
+            "meta": {
+              "typeVersion": [0, 0],
+              "custom": null,
+              "preferredVisualisationType": "graph",
+              "executedQueryString": "SELECT ( (mean(\"MainInputValues.L1V\") * mean(\"MainInputValues.L1I\")) + (mean(\"MainInputValues.L2V\") * mean(\"MainInputValues.L2I\")) + (mean(\"MainInputValues.L3V\") * mean(\"MainInputValues.L3I\")) * ABS(mean(\"MainInputValues.PF\")) ) FROM \"autogen\".\"stagesmart\" WHERE time \u003e= 1735521745896ms and time \u003c= 1735522045896ms GROUP BY time(5m), \"location\"::tag fill(previous)"
+            },
+            "fields": [
+              {
+                "name": "Time",
+                "type": "time",
+                "typeInfo": { "frame": "time.Time" }
+              },
+              {
+                "name": "Value",
+                "type": "number",
+                "typeInfo": { "frame": "float64", "nullable": true },
+                "labels": { "location": "PDU 28 (Chaos West)" },
+                "config": { "displayNameFromDS": "measurement" }
+              }
+            ]
+          },
+          "data": {
+            "values": [
+              [1735521600000, 1735521900000],
+              [4216.593627255858, 4315.89920435353]
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

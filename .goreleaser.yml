@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=https://goreleaser.com/static/schema.json
+builds:
+  - id: zutexter
+    main: ./cmd
+    goos:
+      - linux
+    goarch:
+      - amd64
+      - arm64
+      - arm

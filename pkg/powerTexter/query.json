@@ -1,0 +1,32 @@
+{
+  "queries": [
+    {
+      "alias": "measurement",
+      "datasource": {
+        "type": "influxdb",
+        "uid": "a8d40f12-ffbe-414c-8354-8069845bea22"
+      },
+      "groupBy": [{ "params": ["location::tag"], "type": "tag" }],
+      "hide": false,
+      "measurement": "stagesmart",
+      "orderByTime": "ASC",
+      "policy": "autogen",
+      "query": "SELECT ( (mean(\"MainInputValues.L1V\") * mean(\"MainInputValues.L1I\")) + (mean(\"MainInputValues.L2V\") * mean(\"MainInputValues.L2I\")) + (mean(\"MainInputValues.L3V\") * mean(\"MainInputValues.L3I\")) * ABS(mean(\"MainInputValues.PF\")) ) FROM \"autogen\".\"stagesmart\" WHERE $timeFilter GROUP BY time(5m), \"location\"::tag fill(previous)",
+      "rawQuery": true,
+      "refId": "A",
+      "resultFormat": "time_series",
+      "select": [],
+      "tags": [],
+      "adhocFilters": [],
+      "rawSql": "",
+      "limit": "",
+      "slimit": "",
+      "tz": "",
+      "datasourceId": 4,
+      "intervalMs": 30000,
+      "maxDataPoints": 400
+    }
+  ],
+  "from": "now-5m",
+  "to": "now"
+}
