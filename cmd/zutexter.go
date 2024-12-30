@@ -27,9 +27,11 @@ func main() {
 	quit := make(chan struct{})
 	go func() {
 		for {
+			sendAll(display, texters)
+
 			select {
 			case <-ticker.C:
-				sendAll(display, texters)
+				continue
 			case <-quit:
 				ticker.Stop()
 				return
