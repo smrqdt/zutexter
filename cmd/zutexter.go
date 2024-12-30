@@ -3,6 +3,7 @@ package main
 import (
 	"net/url"
 	"os"
+	"time"
 
 	"github.com/charmbracelet/log"
 
@@ -22,6 +23,23 @@ func main() {
 		&powertexter.PowerTexter{GrafanaURL: "https://c3power.top/api/ds/query"},
 	}
 
+	ticker := time.NewTicker(5 * time.Minute)
+	quit := make(chan struct{})
+	go func() {
+		for {
+			select {
+			case <-ticker.C:
+				sendAll(display, texters)
+			case <-quit:
+				ticker.Stop()
+				return
+			}
+		}
+	}()
+	<-quit
+}
+
+func sendAll(display display.Display, texters []texter.Texter) {
 	for _, texter := range texters {
 		msg, err := texter.Text()
 		if err != nil {
